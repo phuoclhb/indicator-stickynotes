@@ -7,7 +7,9 @@ Add some tweaks:
 - Scrollbar
 
 
-Run by command
+Run
 ```bash
-/usr/bin/python3 [a folder]/indicator-stickynotes.py
+git clone https://github.com/phuoclhb/indicator-stickynotes.git indicator-stickynotes
+cd indicator-stickynotes
+/usr/bin/python3 ./indicator-stickynotes.py
 ```

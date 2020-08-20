@@ -13,3 +13,6 @@ git clone https://github.com/phuoclhb/indicator-stickynotes.git indicator-sticky
 cd indicator-stickynotes
 /usr/bin/python3 ./indicator-stickynotes.py
 ```
+
+Screenshot
+![alt Desktop with sticky notes](./screenshot/desktop-w-sticky.png)

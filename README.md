@@ -5,3 +5,9 @@ Forked: https://github.com/umangv/indicator-stickynotes
 
 Add some tweaks:
 - Scrollbar
+
+
+Run by command
+```bash
+/usr/bin/python3 [a folder]/indicator-stickynotes.py
+```

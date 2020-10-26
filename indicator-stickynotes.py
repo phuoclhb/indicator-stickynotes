@@ -84,28 +84,59 @@ class IndicatorStickyNotes:
                 "Sticky Notes", "indicator-stickynotes",
                 appindicator.IndicatorCategory.APPLICATION_STATUS)
         # Delete/modify the following file when distributing as a package
-        self.ind.set_icon_theme_path(os.path.abspath(os.path.join(
-            os.path.dirname(__file__), 'Icons')))
-        self.ind.set_icon("indicator-stickynotes-mono")
+        self.ind.set_icon_theme_path(os.path.abspath(os.path.join(os.path.dirname(__file__), '')))
+        self.ind.set_icon("indicator-stickynotes-icon")
         self.ind.set_status(appindicator.IndicatorStatus.ACTIVE)
         self.ind.set_title(_("Sticky Notes"))
         # Create Menu
         self.menu = Gtk.Menu()
-        self.mNewNote = Gtk.MenuItem(_("New Note"))
+        # self.mNewNote = Gtk.MenuItem()
+        # self.mNewNote.set_label(_("New Note"))
+        # self.menu.append(self.mNewNote)
+        # self.mNewNote.connect("activate", self.new_note, None)
+        # self.mNewNote.show()
+        
+        self.mNewNote = Gtk.MenuItem()
+        self.mNewNote.set_label(_("New Note"))
         self.menu.append(self.mNewNote)
         self.mNewNote.connect("activate", self.new_note, None)
         self.mNewNote.show()
+        
+        self.mAllNotes = Gtk.MenuItem()
+        self.mAllNotes.set_label(_("All Notes"))
+        self.mAllNotes.show()
+        if len(self.nset.notes) > 0:
+            self.menu.append(self.mAllNotes)
+            # self.mNewNote.connect("activate", self.new_note, None)
+            self.notes_sub_menu = Gtk.Menu()
+            
+            i = 1
+            for note in self.nset.notes:
+                anItem = Gtk.MenuItem()
+                anItem.set_label(_("Item %s" % (i)))
+                self.notes_sub_menu.append(anItem)
+                anItem.show()
+                i += 1
+            
+            self.mAllNotes.set_submenu(self.notes_sub_menu)
+            self.mAllNotes.show()
+        else:
+            self.mNewNote.set_label(_("New Note"))
+            self.menu.append(self.mAllNotes)
+            self.mAllNotes.set_sensitive(False)
 
         s = Gtk.SeparatorMenuItem.new()
         self.menu.append(s)
         s.show()
 
-        self.mShowAll = Gtk.MenuItem(_("Show All"))
+        self.mShowAll = Gtk.MenuItem()
+        self.mShowAll.set_label(_("Show All"))
         self.menu.append(self.mShowAll)
         self.mShowAll.connect("activate", self.showall, None)
         self.mShowAll.show()
 
-        self.mHideAll = Gtk.MenuItem(_("Hide All"))
+        self.mHideAll = Gtk.MenuItem()
+        self.mHideAll.set_label(_("Hide All"))
         self.menu.append(self.mHideAll)
         self.mHideAll.connect("activate", self.hideall, None)
         self.mHideAll.show()
@@ -114,12 +145,14 @@ class IndicatorStickyNotes:
         self.menu.append(s)
         s.show()
 
-        self.mLockAll = Gtk.MenuItem(_("Lock All"))
+        self.mLockAll = Gtk.MenuItem()
+        self.mLockAll.set_label(_("Lock All"))
         self.menu.append(self.mLockAll)
         self.mLockAll.connect("activate", self.lockall, None)
         self.mLockAll.show()
 
-        self.mUnlockAll = Gtk.MenuItem(_("Unlock All"))
+        self.mUnlockAll = Gtk.MenuItem()
+        self.mUnlockAll.set_label(_("Unlock All"))
         self.menu.append(self.mUnlockAll)
         self.mUnlockAll.connect("activate", self.unlockall, None)
         self.mUnlockAll.show()
@@ -128,12 +161,14 @@ class IndicatorStickyNotes:
         self.menu.append(s)
         s.show()
 
-        self.mExport = Gtk.MenuItem(_("Export Data"))
+        self.mExport = Gtk.MenuItem()
+        self.mExport.set_label(_("Export Data"))
         self.menu.append(self.mExport)
         self.mExport.connect("activate", self.export_datafile, None)
         self.mExport.show()
 
-        self.mImport = Gtk.MenuItem(_("Import Data"))
+        self.mImport = Gtk.MenuItem()
+        self.mImport.set_label(_("Import Data"))
         self.menu.append(self.mImport)
         self.mImport.connect("activate", self.import_datafile, None)
         self.mImport.show()
@@ -142,12 +177,14 @@ class IndicatorStickyNotes:
         self.menu.append(s)
         s.show()
 
-        self.mAbout = Gtk.MenuItem(_("About"))
+        self.mAbout = Gtk.MenuItem()
+        self.mAbout.set_label(_("About"))
         self.menu.append(self.mAbout)
         self.mAbout.connect("activate", self.show_about, None)
         self.mAbout.show()
 
-        self.mSettings = Gtk.MenuItem(_("Settings"))
+        self.mSettings = Gtk.MenuItem()
+        self.mSettings.set_label(_("Settings"))
         self.menu.append(self.mSettings)
         self.mSettings.connect("activate", self.show_settings, None)
         self.mSettings.show()
@@ -156,7 +193,8 @@ class IndicatorStickyNotes:
         self.menu.append(s)
         s.show()
 
-        self.mQuit = Gtk.MenuItem(_("Quit"))
+        self.mQuit = Gtk.MenuItem()
+        self.mQuit.set_label(_("Quit"))
         self.menu.append(self.mQuit)
         self.mQuit.connect("activate", Gtk.main_quit, None)
         self.mQuit.show()

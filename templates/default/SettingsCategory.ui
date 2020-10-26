@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.1 -->
+<interface>
+  <requires lib="gtk+" version="3.14"/>
+  <object class="GtkWindow" id="winCategory">
+    <property name="can-focus">False</property>
+    <property name="margin-top">5</property>
+    <child>
+      <object class="GtkExpander" id="catExpander">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="margin-left">7</property>
+        <property name="margin-right">7</property>
+        <property name="margin-bottom">7</property>
+        <child>
+          <!-- n-columns=3 n-rows=5 -->
+          <object class="GtkGrid" id="grid1">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <child>
+              <object class="GtkLabel" id="lBGCol">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin-start">3</property>
+                <property name="margin-top">5</property>
+                <property name="label" translatable="yes">Background Color</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lTextCol">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin-start">3</property>
+                <property name="margin-top">5</property>
+                <property name="label" translatable="yes">Text Color</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="cbBG">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="halign">end</property>
+                <property name="margin-top">5</property>
+                <property name="title" translatable="yes">Pick a Background Color</property>
+                <signal name="color-set" handler="update_bg" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="cbText">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="halign">end</property>
+                <property name="margin-top">5</property>
+                <property name="title" translatable="yes">Pick a Text Color</property>
+                <signal name="color-set" handler="update_textcolor" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lName">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin-start">3</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Name</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="eName">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="invisible-char">•</property>
+                <signal name="changed" handler="eName_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lFont">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin-start">3</property>
+                <property name="margin-top">5</property>
+                <property name="label" translatable="yes">Fontxxx</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFontButton" id="fbFont">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="halign">end</property>
+                <property name="margin-top">5</property>
+                <property name="font">Sans 12</property>
+                <property name="preview-text"/>
+                <property name="show-preview-entry">False</property>
+                <signal name="font-set" handler="update_font" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolbar" id="catToolbar">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="margin-top">10</property>
+                <property name="toolbar-style">both-horiz</property>
+                <property name="icon_size">2</property>
+                <child>
+                  <object class="GtkToolButton" id="tbMkDef">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="tooltip-text" translatable="yes">Make Default Category</property>
+                    <property name="is-important">True</property>
+                    <property name="label" translatable="yes">Make Default</property>
+                    <property name="use-underline">True</property>
+                    <property name="stock-id">gtk-index</property>
+                    <signal name="clicked" handler="make_default" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="tbDelete">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="tooltip-text" translatable="yes">Delete</property>
+                    <property name="is-important">True</property>
+                    <property name="label" translatable="yes">Delete</property>
+                    <property name="use-underline">True</property>
+                    <property name="stock-id">gtk-delete</property>
+                    <signal name="clicked" handler="delete_cat" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">4</property>
+                <property name="width">3</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+        </child>
+        <child type="label">
+          <object class="GtkLabel" id="lExp">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">New Category</property>
+            <attributes>
+              <attribute name="scale" value="1.75"/>
+            </attributes>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

@@ -25,15 +25,14 @@ from locale import gettext as _
 import os.path
 import colorsys
 import uuid
+from stickynotes.info import *
 
 def load_global_css():
     """Adds a provider for the global CSS"""
     global_css = Gtk.CssProvider()
-    global_css.load_from_path(os.path.join(os.path.dirname(__file__), "..",
-        "style_global.css"))
+    global_css.load_from_path(os.path.join(os.path.dirname(__file__), "..", get_theme_css_folder() + "style_global.css"))
     Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
             global_css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-
 class StickyNote:
     """Manages the GUI of an individual stickynote"""
     def __init__(self, note):
@@ -49,7 +48,7 @@ class StickyNote:
         self.populate_menu()
 
         # Load CSS template and initialize Gtk.CssProvider
-        with open(os.path.join(self.path, "style.css"), encoding="utf-8") \
+        with open(os.path.join(self.path, get_theme_css_folder() + "style.css"), encoding="utf-8") \
                 as css_file:
             self.css_template = Template(css_file.read())
         self.css = Gtk.CssProvider()
@@ -59,8 +58,7 @@ class StickyNote:
     def build_note(self):
         self.builder = Gtk.Builder()
         GObject.type_register(GtkSource.View)
-        self.builder.add_from_file(os.path.join(self.path,
-            "StickyNotes.ui"))
+        self.builder.add_from_file(os.path.join(self.path, get_template_folder() + "StickyNotes.ui"))
         self.builder.connect_signals(self)
         self.winMain = self.builder.get_object("MainWindow")
 
@@ -192,12 +190,14 @@ class StickyNote:
         # an arbitrary quadratic found by trial and error
         thresh_sat = 1.05 - 1.7*((v-1)**2)
         suffix = "-dark" if s >= thresh_sat else ""
-        iconfiles = {"imgAdd":"add", "imgClose":"close", "imgDropdown":"menu",
-                "imgLock":"lock", "imgUnlock":"unlock", "imgResizeR":"resizer"}
+        # iconfiles = {"imgAdd":"add", "imgClose":"close", "imgDropdown":"menu",
+        #         "imgLock":"lock", "imgUnlock":"unlock", "imgResizeR":"resizer"}
+        iconfiles = DEFAULT_ICON_FILES
+        # {"imgAdd":"add.png", "imgClose":"close.png", "imgDropdown":"menu.png",
+        #                 "imgLock":"icon-lock.svg", "imgUnlock":"icon-lock_open.svg", "imgResizeR":"resizer.png"}
         for img, filename in iconfiles.items():
             getattr(self, img).set_from_file(
-                    os.path.join(os.path.dirname(__file__), "..","Icons/" +
-                    filename + suffix + ".png"))
+                    os.path.join(os.path.dirname(__file__), "..", get_theme_icons_folder() + filename)) # + suffix + ".png"
 
     def css_data(self):
         """Returns data to substitute into the CSS template"""
@@ -307,8 +307,7 @@ class StickyNote:
         self.save(*args)
 
 def show_about_dialog():
-    glade_file = os.path.abspath(os.path.join(os.path.dirname(__file__),
-            '..', "GlobalDialogs.ui"))
+    glade_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', get_template_folder() + "GlobalDialogs.ui"))
     builder = Gtk.Builder()
     builder.add_from_file(glade_file)
     winAbout = builder.get_object("AboutWindow")
@@ -325,8 +324,7 @@ class SettingsCategory:
         self.builder = Gtk.Builder()
         self.path = os.path.abspath(os.path.join(os.path.dirname(__file__),
             '..'))
-        self.builder.add_objects_from_file(os.path.join(self.path,
-            "SettingsCategory.ui"), ["catExpander"])
+        self.builder.add_objects_from_file(os.path.join(self.path, get_template_folder() + "SettingsCategory.ui"), ["catExpander"])
         self.builder.connect_signals(self)
         widgets = ["catExpander", "lExp", "cbBG", "cbText", "eName",
                 "confirmDelete", "fbFont"]
@@ -427,7 +425,7 @@ class SettingsDialog:
         self.categories = {}
         self.path = os.path.abspath(os.path.join(os.path.dirname(__file__),
             '..'))
-        glade_file = (os.path.join(self.path, "GlobalDialogs.ui"))
+        glade_file = (os.path.join(self.path, get_template_folder() + "GlobalDialogs.ui"))
         self.builder = Gtk.Builder()
         self.builder.add_from_file(glade_file)
         self.builder.connect_signals(self)

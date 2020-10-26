@@ -36,8 +36,7 @@ class Note:
             self.category = ""
         last_modified = content.get('last_modified')
         if last_modified:
-            self.last_modified = datetime.strptime(last_modified,
-                    "%Y-%m-%dT%H:%M:%S")
+            self.last_modified = datetime.strptime(last_modified, "%Y-%m-%dT%H:%M:%S")
         else:
             self.last_modified = datetime.now()
         # Don't create GUI until show is called
@@ -49,9 +48,10 @@ class Note:
         if self.gui != None:
             self.gui.update_note()
             self.properties = self.gui.properties()
-        return {"uuid":self.uuid, "body":self.body,
-                "last_modified":self.last_modified.strftime(
-                    "%Y-%m-%dT%H:%M:%S"), "properties":self.properties,
+        return {"uuid":self.uuid, 
+                "body":self.body,
+                "last_modified":self.last_modified.strftime("%Y-%m-%dT%H:%M:%S"), 
+                "properties":self.properties,
                 "cat": self.category}
 
     def update(self,body=None):
@@ -153,8 +153,7 @@ class NoteSet:
                     uuid = newnote["uuid"]
                 else:
                     uuid = str(uuid.uuid4())
-                dnotes[uuid] = Note(newnote, gui_class=self.gui_class,
-                        noteset=self)
+                dnotes[uuid] = Note(newnote, gui_class=self.gui_class, noteset=self)
         # copy notes over from dictionary to list
         self.notes = list(dnotes.values())
         self.showall(reload_from_backend=True)

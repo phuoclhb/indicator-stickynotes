@@ -410,8 +410,7 @@ class SettingsDialog:
     def __init__(self, noteset):
         self.noteset = noteset
         self.categories = {}
-        self.path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-            '..'))
+        self.path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
         glade_file = (os.path.join(self.path, get_template_folder() + "GlobalDialogs.ui"))
         self.builder = Gtk.Builder()
         self.builder.add_from_file(glade_file)

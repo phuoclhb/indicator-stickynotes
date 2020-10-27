@@ -85,7 +85,7 @@ class IndicatorStickyNotes:
                 appindicator.IndicatorCategory.APPLICATION_STATUS)
         # Delete/modify the following file when distributing as a package
         self.ind.set_icon_theme_path(os.path.abspath(os.path.join(os.path.dirname(__file__), '')))
-        self.ind.set_icon("indicator-stickynotes-icon")
+        self.ind.set_icon_full("indicator-stickynotes-icon", _("Sticky Notes"))
         self.ind.set_status(appindicator.IndicatorStatus.ACTIVE)
         self.ind.set_title(_("Sticky Notes"))
         # Create Menu

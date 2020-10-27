@@ -13,7 +13,7 @@
         <property name="margin-right">7</property>
         <property name="margin-bottom">7</property>
         <child>
-          <!-- n-columns=3 n-rows=5 -->
+          <!-- n-columns=4 n-rows=7 -->
           <object class="GtkGrid" id="grid1">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
@@ -27,55 +27,12 @@
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
                 <property name="margin-start">3</property>
-                <property name="margin-top">5</property>
-                <property name="label" translatable="yes">Background Color</property>
+                <property name="margin-end">5</property>
+                <property name="margin-top">10</property>
+                <property name="label" translatable="yes">Background Color:</property>
               </object>
               <packing>
                 <property name="left-attach">0</property>
-                <property name="top-attach">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="lTextCol">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="halign">start</property>
-                <property name="margin-start">3</property>
-                <property name="margin-top">5</property>
-                <property name="label" translatable="yes">Text Color</property>
-              </object>
-              <packing>
-                <property name="left-attach">0</property>
-                <property name="top-attach">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkColorButton" id="cbBG">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="halign">end</property>
-                <property name="margin-top">5</property>
-                <property name="title" translatable="yes">Pick a Background Color</property>
-                <signal name="color-set" handler="update_bg" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left-attach">1</property>
-                <property name="top-attach">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkColorButton" id="cbText">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="halign">end</property>
-                <property name="margin-top">5</property>
-                <property name="title" translatable="yes">Pick a Text Color</property>
-                <signal name="color-set" handler="update_textcolor" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left-attach">1</property>
                 <property name="top-attach">2</property>
               </packing>
             </child>
@@ -85,23 +42,10 @@
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
                 <property name="margin-start">3</property>
-                <property name="hexpand">True</property>
-                <property name="label" translatable="yes">Name</property>
+                <property name="label" translatable="yes">Name:</property>
               </object>
               <packing>
                 <property name="left-attach">0</property>
-                <property name="top-attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="eName">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="invisible-char">•</property>
-                <signal name="changed" handler="eName_changed" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left-attach">1</property>
                 <property name="top-attach">0</property>
               </packing>
             </child>
@@ -111,8 +55,8 @@
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
                 <property name="margin-start">3</property>
-                <property name="margin-top">5</property>
-                <property name="label" translatable="yes">Fontxxx</property>
+                <property name="margin-top">10</property>
+                <property name="label" translatable="yes">Font:</property>
               </object>
               <packing>
                 <property name="left-attach">0</property>
@@ -120,27 +64,10 @@
               </packing>
             </child>
             <child>
-              <object class="GtkFontButton" id="fbFont">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="halign">end</property>
-                <property name="margin-top">5</property>
-                <property name="font">Sans 12</property>
-                <property name="preview-text"/>
-                <property name="show-preview-entry">False</property>
-                <signal name="font-set" handler="update_font" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left-attach">1</property>
-                <property name="top-attach">3</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkToolbar" id="catToolbar">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="margin-top">10</property>
+                <property name="margin-top">20</property>
                 <property name="toolbar-style">both-horiz</property>
                 <property name="icon_size">2</property>
                 <child>
@@ -178,21 +105,199 @@
               </object>
               <packing>
                 <property name="left-attach">0</property>
-                <property name="top-attach">4</property>
+                <property name="top-attach">6</property>
+                <property name="width">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lTabWidth">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin-left">3</property>
+                <property name="margin-start">3</property>
+                <property name="margin-top">10</property>
+                <property name="label" translatable="yes">Tab Width:</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="cbBG">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="halign">start</property>
+                <property name="margin-end">10</property>
+                <property name="margin-top">10</property>
+                <property name="title" translatable="yes">Pick a Background Color</property>
+                <signal name="color-set" handler="update_bg" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lTextCol">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin-left">3</property>
+                <property name="margin-start">3</property>
+                <property name="margin-end">20</property>
+                <property name="margin-top">10</property>
+                <property name="label" translatable="yes">Text Color:</property>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="cbText">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="halign">start</property>
+                <property name="margin-top">10</property>
+                <property name="title" translatable="yes">Pick a Text Color</property>
+                <signal name="color-set" handler="update_textcolor" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">3</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="txtTabWidth">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="margin-end">10</property>
+                <property name="margin-top">10</property>
+                <property name="max-length">3</property>
+                <property name="max-width-chars">4</property>
+                <property name="input-purpose">number</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFontButton" id="fbFont">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="halign">start</property>
+                <property name="margin-top">10</property>
+                <property name="font">Sans 12</property>
+                <property name="preview-text"/>
+                <property name="show-preview-entry">False</property>
+                <signal name="font-set" handler="update_font" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">3</property>
                 <property name="width">3</property>
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkEntry" id="eName">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="invisible-char">•</property>
+                <signal name="changed" handler="eName_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">0</property>
+                <property name="width">3</property>
+              </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel" id="lWrapMode">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin-left">3</property>
+                <property name="margin-start">3</property>
+                <property name="margin-top">10</property>
+                <property name="label" translatable="yes">Wrap Mode:</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">4</property>
+              </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkComboBox" id="cbWrapMode">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="margin-end">10</property>
+                <property name="margin-top">10</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">4</property>
+              </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel" id="lWrapMode1">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin-left">3</property>
+                <property name="margin-start">3</property>
+                <property name="margin-top">5</property>
+                <property name="label" translatable="yes">Theme:</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="cbTheme">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="margin-top">10</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">1</property>
+                <property name="width">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="bShowLineNumber">
+                <property name="label" translatable="yes">Show Line Numbers</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="draw-indicator">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">4</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="bUseSpace">
+                <property name="label" translatable="yes">Use Spaces</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="draw-indicator">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">5</property>
+                <property name="width">2</property>
+              </packing>
             </child>
           </object>
         </child>
@@ -202,7 +307,7 @@
             <property name="can-focus">False</property>
             <property name="label" translatable="yes">New Category</property>
             <attributes>
-              <attribute name="scale" value="1.75"/>
+              <attribute name="scale" value="1.5"/>
             </attributes>
           </object>
         </child>

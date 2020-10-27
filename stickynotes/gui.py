@@ -185,7 +185,13 @@ class StickyNote:
         suffix = "-dark" if s >= thresh_sat else ""
         # iconfiles = {"imgAdd":"add", "imgClose":"close", "imgDropdown":"menu",
         #         "imgLock":"lock", "imgUnlock":"unlock", "imgResizeR":"resizer"}
-        iconfiles = DEFAULT_ICON_FILES
+        iconfiles = {"imgAdd":"note_add.svg", 
+                                "imgClose":"delete.svg", 
+                                "imgDropdown":"menu.svg",
+                                "imgLock":"lock.svg", 
+                                "imgUnlock":"lock_open.svg", 
+                                "imgResizeR":"resizer.svg"}
+                                #DEFAULT_ICON_FILES
         # {"imgAdd":"add.png", "imgClose":"close.png", "imgDropdown":"menu.png",
         #                 "imgLock":"icon-lock.svg", "imgUnlock":"icon-lock_open.svg", "imgResizeR":"resizer.png"}
         for img, filename in iconfiles.items():
@@ -225,11 +231,12 @@ class StickyNote:
         sep.show()
 
         catgroup = []
-        mcats = Gtk.MenuItem.new_with_label(_("Categories:"))
+        mcats = Gtk.RadioMenuItem.new_with_label(catgroup, _("Categories:"))
+        #Gtk.MenuItem.new_with_label(_("Categories:"))
         #Gtk.RadioMenuItem.new_with_label(catgroup, _("Categories:"))
         self.menu.append(mcats)
         mcats.set_sensitive(False)
-        #catgroup = mcats.get_group()
+        catgroup = mcats.get_group()
         mcats.show()
 
         for cid, cdata in self.noteset.categories.items():

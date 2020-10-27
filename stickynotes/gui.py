@@ -31,8 +31,7 @@ def load_global_css():
     """Adds a provider for the global CSS"""
     global_css = Gtk.CssProvider()
     global_css.load_from_path(os.path.join(os.path.dirname(__file__), "..", get_theme_css_folder() + "style_global.css"))
-    Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
-            global_css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+    Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), global_css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 class StickyNote:
     """Manages the GUI of an individual stickynote"""
     def __init__(self, note):
@@ -63,13 +62,11 @@ class StickyNote:
         self.winMain = self.builder.get_object("MainWindow")
 
         # Get necessary objects
-        widgets = ["txtNote", "bAdd", "imgAdd", "imgResizeR", "eResizeR",
-                "bLock", "imgLock", "imgUnlock", "imgClose", "imgDropdown",
-                "bClose", "confirmDelete", "movebox1", "movebox2"]
+        widgets = ["txtNote", "bAdd", "imgAdd", "imgResizeR", "eResizeR", "bLock", "imgLock", "imgUnlock", "imgClose", 
+                    "imgDropdown", "bClose", "confirmDelete", "movebox1", "movebox2"]
         for w in widgets:
             setattr(self, w, self.builder.get_object(w))
-        self.style_contexts = [self.winMain.get_style_context(),
-                self.txtNote.get_style_context()]
+        self.style_contexts = [self.winMain.get_style_context(), self.txtNote.get_style_context()]
         # Update window-specific style. Global styles are loaded initially!
         self.update_style()
         self.update_font()
@@ -94,8 +91,8 @@ class StickyNote:
         self.winMain.show_all()
         # Mouse over
         self.eResizeR.get_window().set_cursor(Gdk.Cursor.new_for_display(
-                    self.eResizeR.get_window().get_display(),
-                    Gdk.CursorType.BOTTOM_RIGHT_CORNER))
+                                                        self.eResizeR.get_window().get_display(),
+                                                        Gdk.CursorType.BOTTOM_RIGHT_CORNER))
         # Set locked state
         self.set_locked_state(self.locked)
 
@@ -142,13 +139,11 @@ class StickyNote:
 
     def update_note(self):
         """Update the underlying note object"""
-        self.note.update(self.bbody.get_text(self.bbody.get_start_iter(),
-            self.bbody.get_end_iter(), True))
+        self.note.update(self.bbody.get_text(self.bbody.get_start_iter(), self.bbody.get_end_iter(), True))
 
     def move(self, widget, event):
         """Action to begin moving (by dragging) the window"""
-        self.winMain.begin_move_drag(event.button, event.x_root,
-                event.y_root, event.get_time())
+        self.winMain.begin_move_drag(event.button, event.x_root, event.y_root, event.get_time())
         return False
 
     def resize(self, widget, event, *args):
@@ -177,12 +172,10 @@ class StickyNote:
     def update_style(self):
         """Updates the style using CSS template"""
         self.update_button_color()
-        css_string = self.css_template.substitute(**self.css_data())\
-                .encode("ascii", "replace")
+        css_string = self.css_template.substitute(**self.css_data()).encode("ascii", "replace")
         self.css.load_from_data(css_string)
         for context in self.style_contexts:
-            context.add_provider(self.css,
-                    Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+            context.add_provider(self.css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
     def update_button_color(self):
         """Switches between regular and dark icons appropriately"""
@@ -196,19 +189,18 @@ class StickyNote:
         # {"imgAdd":"add.png", "imgClose":"close.png", "imgDropdown":"menu.png",
         #                 "imgLock":"icon-lock.svg", "imgUnlock":"icon-lock_open.svg", "imgResizeR":"resizer.png"}
         for img, filename in iconfiles.items():
-            getattr(self, img).set_from_file(
-                    os.path.join(os.path.dirname(__file__), "..", get_theme_icons_folder() + filename)) # + suffix + ".png"
+            getattr(self, img).set_from_file(os.path.join(os.path.dirname(__file__), 
+                                                            "..", 
+                                                            get_theme_icons_folder() + filename)) # + suffix + ".png"
 
     def css_data(self):
         """Returns data to substitute into the CSS template"""
         data = {}
         # Converts to RGB hex. All RGB/HSV values are scaled to a max of 1
-        rgb_to_hex = lambda x: "#" + "".join(["{:02x}".format(int(255*a))
-            for a in x])
+        rgb_to_hex = lambda x: "#" + "".join(["{:02x}".format(int(255*a)) for a in x])
         hsv_to_hex = lambda x: rgb_to_hex(colorsys.hsv_to_rgb(*x))
         bgcolor_hsv = self.note.cat_prop("bgcolor_hsv")
-        data["bgcolor_hex"] = hsv_to_hex(
-                self.note.cat_prop("bgcolor_hsv"))
+        data["bgcolor_hex"] = hsv_to_hex(self.note.cat_prop("bgcolor_hsv"))
         data["text_color"] = rgb_to_hex(self.note.cat_prop("textcolor"))
         return data
 
@@ -233,16 +225,15 @@ class StickyNote:
         sep.show()
 
         catgroup = []
-        mcats = Gtk.RadioMenuItem.new_with_label(catgroup,
-                _("Categories:"))
+        mcats = Gtk.MenuItem.new_with_label(_("Categories:"))
+        #Gtk.RadioMenuItem.new_with_label(catgroup, _("Categories:"))
         self.menu.append(mcats)
         mcats.set_sensitive(False)
-        catgroup = mcats.get_group()
+        #catgroup = mcats.get_group()
         mcats.show()
 
         for cid, cdata in self.noteset.categories.items():
-            mitem = Gtk.RadioMenuItem.new_with_label(catgroup,
-                    cdata.get("name", _("New Category")))
+            mitem = Gtk.RadioMenuItem.new_with_label(catgroup, cdata.get("name", _("New Category")))
             catgroup = mitem.get_group()
             if cid == self.note.category:
                 mitem.set_active(True)
@@ -252,7 +243,7 @@ class StickyNote:
 
     def malways_on_top_toggled(self, widget, *args):
         self.winMain.set_keep_above(widget.get_active())
-
+    
     def save(self, *args):
         self.note.noteset.save()
         return False
@@ -294,10 +285,8 @@ class StickyNote:
         self.locked = locked
         self.txtNote.set_editable(not self.locked)
         self.txtNote.set_cursor_visible(not self.locked)
-        self.bLock.set_image({True:self.imgLock,
-            False:self.imgUnlock}[self.locked])
-        self.bLock.set_tooltip_text({True: _("Unlock"),
-            False: _("Lock")}[self.locked])
+        self.bLock.set_image({True:self.imgLock, False:self.imgUnlock}[self.locked])
+        self.bLock.set_tooltip_text({True: _("Unlock"), False: _("Lock")}[self.locked])
 
     def lock_clicked(self, *args):
         """Toggle the locked state of the note"""
@@ -322,36 +311,27 @@ class SettingsCategory:
         self.noteset = settingsdialog.noteset
         self.cat = cat
         self.builder = Gtk.Builder()
-        self.path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-            '..'))
+        self.path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
         self.builder.add_objects_from_file(os.path.join(self.path, get_template_folder() + "SettingsCategory.ui"), ["catExpander"])
         self.builder.connect_signals(self)
-        widgets = ["catExpander", "lExp", "cbBG", "cbText", "eName",
-                "confirmDelete", "fbFont"]
+        widgets = ["catExpander", "lExp", "cbBG", "cbText", "eName", "confirmDelete", "fbFont"]
         for w in widgets:
             setattr(self, w, self.builder.get_object(w))
         name = self.noteset.categories[cat].get("name", _("New Category"))
         self.eName.set_text(name)
         self.refresh_title()
-        self.cbBG.set_rgba(Gdk.RGBA(*colorsys.hsv_to_rgb(
-            *self.noteset.get_category_property(cat, "bgcolor_hsv")),
-            alpha=1))
-        self.cbText.set_rgba(Gdk.RGBA(
-            *self.noteset.get_category_property(cat, "textcolor"),
-            alpha=1))
+        self.cbBG.set_rgba(Gdk.RGBA(*colorsys.hsv_to_rgb(*self.noteset.get_category_property(cat, "bgcolor_hsv")), alpha=1))
+        self.cbText.set_rgba(Gdk.RGBA(*self.noteset.get_category_property(cat, "textcolor"), alpha=1))
         fontname = self.noteset.get_category_property(cat, "font")
         if not fontname:
             # Get the system default font, if none is set
-            fontname = \
-                self.settingsdialog.wSettings.get_style_context()\
-                    .get_font(Gtk.StateFlags.NORMAL).to_string()
+            fontname = self.settingsdialog.wSettings.get_style_context().get_font(Gtk.StateFlags.NORMAL).to_string()
                 #why.is.this.so.long?
         self.fbFont.set_font(fontname)
 
     def refresh_title(self, *args):
         """Updates the title of the category"""
-        name = self.noteset.categories[self.cat].get("name",
-                _("New Category"))
+        name = self.noteset.categories[self.cat].get("name", _("New Category"))
         if self.noteset.properties.get("default_cat", "") == self.cat:
             name += " (" + _("Default Category") + ")"
         self.lExp.set_text(name)
@@ -435,6 +415,7 @@ class SettingsDialog:
         for c in self.noteset.categories:
             self.add_category_widgets(c)
         ret =  self.wSettings.run()
+        self.wSettings.set_keep_above(True)    
         self.wSettings.destroy()
 
     def add_category_widgets(self, cat):

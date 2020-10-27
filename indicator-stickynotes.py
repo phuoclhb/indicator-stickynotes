@@ -285,7 +285,9 @@ class IndicatorStickyNotes:
         show_about_dialog()
 
     def show_settings(self, *args):
+        self.hideall()
         wSettings = SettingsDialog(self.nset)
+        self.showall()
 
     def save(self):
         self.nset.save()

@@ -176,7 +176,7 @@ class NoteSet:
         for note in self.notes:
             note.hide(*args)
         self.properties["all_visible"] = False
-
+        
     def get_category_property(self, cat, prop):
         """Get a property of a category or the default"""
         if ((not cat) or (not cat in self.categories)) and \
